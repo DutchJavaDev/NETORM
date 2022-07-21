@@ -173,3 +173,13 @@ UpgradeLog*.htm
 # Microsoft Fakes
 FakesAssemblies/
 src/NLORM/NLORM/x64/SQLite.Interop.dll
+src/NLORM/.vs/NLORM/v17/.futdcache.v1
+src/NLORM/.vs/NLORM/DesignTimeBuild/.dtbcache.v2
+src/NLORM/.vs/NLORM/FileContentIndex/7ec9b931-2e78-4369-ae0c-a7c9caab518f.vsidx
+src/NLORM/.vs/NLORM/FileContentIndex/8d02a987-6ef0-451b-9443-2f3827a8cba7.vsidx
+src/NLORM/.vs/NLORM/FileContentIndex/c54aa75d-8095-49fd-b7b5-b3263b3d12ca.vsidx
+src/NLORM/.vs/NLORM/FileContentIndex/dcced992-a8a9-4588-9651-a82a3f15028b.vsidx
+src/NLORM/.vs/NLORM/FileContentIndex/read.lock
+src/NLORM/.vs/ProjectEvaluation/nlorm.metadata.v2
+src/NLORM/.vs/ProjectEvaluation/nlorm.projects.v2
+.vs/VSWorkspaceState.json
