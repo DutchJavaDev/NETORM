@@ -172,3 +172,4 @@ UpgradeLog*.htm
 
 # Microsoft Fakes
 FakesAssemblies/
+src/NLORM/NLORM/x64/SQLite.Interop.dll
