@@ -5,6 +5,8 @@ VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NETORM.DEV", "NLORM.DEV\NETORM.DEV.csproj", "{0721B299-E187-46FB-8D90-545A7F53524B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NETORM", "NETORM\NETORM.csproj", "{38164286-2075-4372-B9A6-423A0BAE02A7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{0721B299-E187-46FB-8D90-545A7F53524B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0721B299-E187-46FB-8D90-545A7F53524B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0721B299-E187-46FB-8D90-545A7F53524B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38164286-2075-4372-B9A6-423A0BAE02A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38164286-2075-4372-B9A6-423A0BAE02A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38164286-2075-4372-B9A6-423A0BAE02A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38164286-2075-4372-B9A6-423A0BAE02A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
