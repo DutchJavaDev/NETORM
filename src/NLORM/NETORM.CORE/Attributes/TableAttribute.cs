@@ -3,11 +3,11 @@
 namespace NETORM.Core.Attributes
 {
     [AttributeUsage(AttributeTargets.Class)]
-    public class TableNameAttribute : Attribute
+    public class TableAttribute : Attribute
     {
-        public TableNameAttribute(string tableName)
+        public TableAttribute(string name = "")
         {
-            TableName = $"{tableName}";
+            TableName = $"{name}";
         }
         public string TableName { get; set; }
     }

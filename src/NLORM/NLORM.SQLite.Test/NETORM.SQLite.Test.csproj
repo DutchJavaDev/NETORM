@@ -66,16 +66,6 @@
     <Compile Include="TestTransaction.cs" />
     <Compile Include="TestUpdate.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\NLORM.Core\NETORM.Core.csproj">
-      <Project>{2306e206-1317-41b0-b437-3bd0934b546c}</Project>
-      <Name>NETORM.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NLORM.SQLite\NETORM.SQLite.csproj">
-      <Project>{8a22eec9-42e8-481b-b72f-3d99e72d8c53}</Project>
-      <Name>NETORM.SQLite</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

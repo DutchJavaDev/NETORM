@@ -207,14 +207,14 @@ namespace NETORM.Core
             return ret;            
         }
 
-        private ModelDefinition ConvertClassToModelDef<T>() 
+        private ObjectDefinition ConvertClassToModelDef<T>() 
         {
-            var mdc = new ModelDefinitionConverter();
+            var mdc = new ObjectDefinitionConverter();
             return mdc.ConverClassToModelDefinition<T>();
         }
-        private ModelDefinition ConvertClassToModelDef(Type t)
+        private ObjectDefinition ConvertClassToModelDef(Type t)
         {
-            var mdc = new ModelDefinitionConverter();
+            var mdc = new ObjectDefinitionConverter();
             return mdc.ConverClassToModelDefinition(t);
         }
 

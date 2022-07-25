@@ -7,11 +7,11 @@ using NETORM.Core.Attributes;
 
 namespace NETORM.Core.Test
 {
-    [TableName("TestTableA")]
+    [Table("TestTableA")]
     class TestClassA
     {
-        [ColumnName("COLID")]
-        [ColumnType(DbType.String,"30",false,"this is id comment")]
+        [Column("COLID")]
+
         public string ID { get; set; }
     }
 
@@ -26,7 +26,7 @@ namespace NETORM.Core.Test
 		[NotGenColumn()]
 		public string HiddenColumn { get; set;}
 
-		[ColumnName("COLID")]
+		[Column("COLID", attributes: new[] { ColumnAttributes.PrimaryKey })]
         [ColumnType(DbType.String,"30",false,"this is id comment")]
 		[NotGenColumn()]
 		public string MultiAttribute { get; set;}
@@ -36,9 +36,9 @@ namespace NETORM.Core.Test
     /// Summary description for ModelDefinitionConverterTest
     /// </summary>
     [TestClass]
-    public class ModelDefinitionConverterTest
+    public class ObjectDefinitionConverterTest
     {
-        public ModelDefinitionConverterTest()
+        public ObjectDefinitionConverterTest()
         {
             //
             // TODO: Add constructor logic here
@@ -67,7 +67,7 @@ namespace NETORM.Core.Test
         [TestMethod]
         public void TestGetTableName()
         {
-            var mdc = new ModelDefinitionConverter();
+            var mdc = new ObjectDefinitionConverter();
             var md = mdc.ConverClassToModelDefinition<TestClassA>();
             string tableName = md.TableName;
             Assert.AreEqual("TestTableA", tableName);
@@ -76,7 +76,7 @@ namespace NETORM.Core.Test
         [TestMethod]
         public void TestGetTableNameWithoutAttr()
         {
-            var mdc = new ModelDefinitionConverter();
+            var mdc = new ObjectDefinitionConverter();
             var md = mdc.ConverClassToModelDefinition<TestClassB>();
             string tableName = md.TableName;
             Assert.AreEqual("TestClassB", tableName);
@@ -85,7 +85,7 @@ namespace NETORM.Core.Test
         [TestMethod]
         public void TestGetColNameWithAttr()
         {
-            var mdc = new ModelDefinitionConverter();
+            var mdc = new ObjectDefinitionConverter();
             var md = mdc.ConverClassToModelDefinition<TestClassA>();
             string idColName = md.PropertyColumnDic["ID"].ColumnName;
             Assert.AreEqual("COLID", idColName);
@@ -94,7 +94,7 @@ namespace NETORM.Core.Test
         [TestMethod]
         public void TestGetColNameWithoutAttr()
         {
-            var mdc = new ModelDefinitionConverter();
+            var mdc = new ObjectDefinitionConverter();
             var md = mdc.ConverClassToModelDefinition<TestClassB>();
             string idColName = md.PropertyColumnDic["ID"].ColumnName;
             Assert.AreEqual("ID", idColName);
@@ -103,8 +103,8 @@ namespace NETORM.Core.Test
         [TestMethod]
         public void TestDoNotGetHiddenColumn()
         {
-            var mdc = new ModelDefinitionConverter();
-            NETORM.Core.BasicDefinitions.ModelDefinition md = mdc.ConverClassToModelDefinition<TestClassC>();
+            var mdc = new ObjectDefinitionConverter();
+            NETORM.Core.BasicDefinitions.ObjectDefinition md = mdc.ConverClassToModelDefinition<TestClassC>();
             Assert.AreEqual<int>( 0,md.PropertyColumnDic.Count);
         }
 

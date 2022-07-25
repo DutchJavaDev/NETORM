@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace NETORM
+﻿namespace NETORM
 {
-    public enum SupportedDb{ MSSQL,SQLITE,MYSQL };
+    public enum SupportedDb{ POSTGRESS,MSSQL,SQLITE,MYSQL };
 }

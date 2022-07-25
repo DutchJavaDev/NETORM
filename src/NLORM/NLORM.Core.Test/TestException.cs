@@ -41,9 +41,9 @@ namespace NETORM.Core.Test
         public void TestDBTypeGuidGen()
         {
             var cfd = createFakeCfdByDbType(DbType.Guid);
-            var cfdDic = new Dictionary<string, BasicDefinitions.ColumnFieldDefinition>();
+            var cfdDic = new Dictionary<string, BasicDefinitions.ColumnDefinition>();
             cfdDic.Add("test1", cfd);
-            var md = new NETORM.Core.BasicDefinitions.ModelDefinition("Test", cfdDic);
+            var md = new NETORM.Core.BasicDefinitions.ObjectDefinition("Test", cfdDic);
             var sqlGen = new BaseSqlGenerator();
             try
             {
@@ -63,9 +63,9 @@ namespace NETORM.Core.Test
         public void TestDBTypeUInt16Gen()
         {
             var cfd = createFakeCfdByDbType(DbType.UInt16);
-            var cfdDic = new Dictionary<string, BasicDefinitions.ColumnFieldDefinition>();
+            var cfdDic = new Dictionary<string, BasicDefinitions.ColumnDefinition>();
             cfdDic.Add("test1", cfd);
-            var md = new NETORM.Core.BasicDefinitions.ModelDefinition("Test", cfdDic);
+            var md = new NETORM.Core.BasicDefinitions.ObjectDefinition("Test", cfdDic);
             var sqlGen = new BaseSqlGenerator();
             try
             {
@@ -81,9 +81,9 @@ namespace NETORM.Core.Test
             }
         }
 
-        private BasicDefinitions.ColumnFieldDefinition createFakeCfdByDbType(DbType dbType)
+        private BasicDefinitions.ColumnDefinition createFakeCfdByDbType(DbType dbType)
         {
-            var cfd = new NETORM.Core.BasicDefinitions.ColumnFieldDefinition();
+            var cfd = new NETORM.Core.BasicDefinitions.ColumnDefinition();
             cfd.FieldType = dbType;
             return cfd;
         }

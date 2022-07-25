@@ -12,9 +12,9 @@ namespace NETORM.Core
     public class BaseSqlGenerator : ISqlGenerator
     {
         private const string StringDeafultLength = "255";
-        private Dictionary<DbType, Func<ColumnFieldDefinition,string>> createSqlFuncDic = null;
+        private Dictionary<DbType, Func<ColumnDefinition,string>> createSqlFuncDic = null;
 
-        public string GenCreateTableSql(ModelDefinition md)
+        public string GenCreateTableSql(ObjectDefinition md)
         {
             var ret = new StringBuilder();
             ret.Append("CREATE TABLE " + md.TableName + " (");
@@ -32,64 +32,64 @@ namespace NETORM.Core
             return ret.ToString();
         }
 
-        virtual public string GenTableExistSql(ModelDefinition md)
+        virtual public string GenTableExistSql(ObjectDefinition md)
         {
             return $@"IF OBJECT_ID('{md.TableName}','U')";
         }
 
-        virtual public string GenCreateString(ColumnFieldDefinition cfd)
+        virtual public string GenCreateString(ColumnDefinition cfd)
         {
             var length = string.IsNullOrEmpty(cfd.Length) ? StringDeafultLength : cfd.Length;
             return GenCreateSqlByType(cfd, "varchar", length);
         }
 
-        virtual public string GenCreateInteger(ColumnFieldDefinition cfd)
+        virtual public string GenCreateInteger(ColumnDefinition cfd)
         {
             return GenCreateSqlByType(cfd, "INTEGER");
         }
 
-        virtual public string GenCreateDateTime(ColumnFieldDefinition cfd)
+        virtual public string GenCreateDateTime(ColumnDefinition cfd)
         {
             return GenCreateSqlByType(cfd, "DATETIME");
         }
 
-        virtual public string GenCreateDecimal(ColumnFieldDefinition cfd)
+        virtual public string GenCreateDecimal(ColumnDefinition cfd)
         {
             var length = string.IsNullOrEmpty(cfd.Length) ? StringDeafultLength : cfd.Length;
             return GenCreateSqlByType(cfd, "decimal", length);
         }
 
-        virtual public string GenCreateBit(ColumnFieldDefinition cfd)
+        virtual public string GenCreateBit(ColumnDefinition cfd)
         {
             return GenCreateSqlByType(cfd, "bit", null);
         }
 
-        virtual public string GenCreateFloat(ColumnFieldDefinition cfd)
+        virtual public string GenCreateFloat(ColumnDefinition cfd)
         {
             return GenCreateSqlByType(cfd, "float", null);
         }
 
-        virtual public string GenCreateReal(ColumnFieldDefinition cfd)
+        virtual public string GenCreateReal(ColumnDefinition cfd)
         {
             return GenCreateSqlByType(cfd, "real", null);
         }
 
-        virtual public string GenCreateTime(ColumnFieldDefinition cfd)
+        virtual public string GenCreateTime(ColumnDefinition cfd)
         {
             return GenCreateSqlByType(cfd, "time", null);
         }
 
-        virtual public string GenCreateTinyint(ColumnFieldDefinition cfd)
+        virtual public string GenCreateTinyint(ColumnDefinition cfd)
         {
             return GenCreateSqlByType(cfd, "tinyint", null);
         }
 
-        virtual public string GenCreateBigint(ColumnFieldDefinition cfd)
+        virtual public string GenCreateBigint(ColumnDefinition cfd)
         {
             return GenCreateSqlByType(cfd, "bigint", null);
         }
 
-        private string GenCreateSqlByType(ColumnFieldDefinition cfd, string type, string length = "")
+        private string GenCreateSqlByType(ColumnDefinition cfd, string type, string length = "")
         {
             var ret = "";
             ret += " " + cfd.ColumnName + " ";
@@ -105,7 +105,7 @@ namespace NETORM.Core
             return ret;
         }
 
-        virtual public string GenDropTableSql(ModelDefinition md)
+        virtual public string GenDropTableSql(ObjectDefinition md)
         {
             var ret = new StringBuilder();
             ret.Append(" DROP TABLE ");
@@ -113,7 +113,7 @@ namespace NETORM.Core
             return ret.ToString();
         }
 
-        virtual public string GenInsertSql(ModelDefinition md)
+        virtual public string GenInsertSql(ObjectDefinition md)
         {
             var ret = new StringBuilder();
 
@@ -130,7 +130,7 @@ namespace NETORM.Core
             return ret.ToString();
         }
 
-        virtual public string GenSelectSql(ModelDefinition md)
+        virtual public string GenSelectSql(ObjectDefinition md)
         {
             var ret = new StringBuilder();
             ret.Append(" SELECT ");
@@ -148,7 +148,7 @@ namespace NETORM.Core
             return ret.ToString();
         }
 
-        virtual public string GenDeleteSql(ModelDefinition md)
+        virtual public string GenDeleteSql(ObjectDefinition md)
         {
             var ret = new StringBuilder();
             ret.Append(" DELETE ");
@@ -156,7 +156,7 @@ namespace NETORM.Core
             return ret.ToString();
         }
 
-        public string GenUpdateSql(ModelDefinition md, Object obj)
+        public string GenUpdateSql(ObjectDefinition md, Object obj)
         {
             var ret = new StringBuilder();
 
@@ -201,7 +201,7 @@ namespace NETORM.Core
         private string GenNormalUpdateParaString(object obj)
         {
             var ret = new StringBuilder();
-            var objMdf = new ModelDefinitionConverter().ConverClassToModelDefinition(obj.GetType());
+            var objMdf = new ObjectDefinitionConverter().ConverClassToModelDefinition(obj.GetType());
             int i = 1;
             foreach (var df in objMdf.PropertyColumnDic.Values)
             {
@@ -215,7 +215,7 @@ namespace NETORM.Core
             return ret.ToString();
         }
 
-        private string GenInsertColFields(ModelDefinition md)
+        private string GenInsertColFields(ObjectDefinition md)
         {
             var ret = "";
             var i = 1;
@@ -231,7 +231,7 @@ namespace NETORM.Core
             return ret;
         }
 
-        private string GenInsertValueFields(ModelDefinition md)
+        private string GenInsertValueFields(ObjectDefinition md)
         {
             var ret = "";
             var i = 1;
@@ -247,7 +247,7 @@ namespace NETORM.Core
             return ret;
         }
 
-        private string GenColumnCreateTableSql(ColumnFieldDefinition cfd)
+        private string GenColumnCreateTableSql(ColumnDefinition cfd)
         {
             GenCreateSqlFuncDic();
             if (!createSqlFuncDic.ContainsKey(cfd.FieldType))
@@ -263,7 +263,7 @@ namespace NETORM.Core
             {
                 return;
             }
-            createSqlFuncDic = new Dictionary<DbType, Func<ColumnFieldDefinition, string>>();
+            createSqlFuncDic = new Dictionary<DbType, Func<ColumnDefinition, string>>();
             createSqlFuncDic.Add(DbType.Byte, GenCreateTinyint);
             createSqlFuncDic.Add(DbType.Int16, GenCreateInteger);  //smallInt
             createSqlFuncDic.Add(DbType.Int32, GenCreateInteger);

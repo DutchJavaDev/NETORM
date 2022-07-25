@@ -33,11 +33,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.SqlClient, Version=4.6.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Data.SqlClient.4.8.3\lib\net461\System.Data.SqlClient.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,9 +49,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NLORM.Core\NETORM.Core.csproj">
-      <Project>{2306e206-1317-41b0-b437-3bd0934b546c}</Project>
-      <Name>NETORM.Core</Name>
+    <ProjectReference Include="..\..\..\..\NLORM\src\NLORM\NLORM.Core\NLORM.Core.csproj">
+      <Project>{2306E206-1317-41B0-B437-3BD0934B546C}</Project>
+      <Name>NLORM.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\NLORM.MSSQL\NETORM.MSSQL.csproj">
       <Project>{bb9a9a2e-d5f4-4953-8e46-cd9d60e46222}</Project>
@@ -70,7 +68,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

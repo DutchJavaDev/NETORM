@@ -2,7 +2,7 @@
 
 namespace NETORM.Core.BasicDefinitions
 {
-    public class ColumnFieldDefinition
+    public class ColumnDefinition
     {
         public string PropName { get; set; }
         public string ColumnName { get; set; }

@@ -110,16 +110,6 @@
     <Compile Include="TestUpdate.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NLORM.Core\NETORM.Core.csproj">
-      <Project>{2306e206-1317-41b0-b437-3bd0934b546c}</Project>
-      <Name>NETORM.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NLORM.MySql\NETORM.MySql.csproj">
-      <Project>{c3e047b2-c7a1-455f-8203-490af9de8c8d}</Project>
-      <Name>NETORM.MySql</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
