@@ -25,8 +25,13 @@ namespace NETORM.ORM.Builder
 
         static void CreateRecord(Type type)
         {
-            Console.WriteLine(type.Name);
+            var properties = type.GetProperties();
+
+            var attributes = type.GetCustomAttributes(true);
+            
             tableRecords.Add(new TableRecord(type.Name, Enumerable.Empty<ColumnRecord>(), new TableConstrain()));
         }
+
+
     }
 }
