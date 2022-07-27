@@ -1,5 +1,6 @@
 ﻿using NETORM.Data;
 using System.Collections.Concurrent;
+using System.Reflection;
 
 namespace NETORM.ORM.Builder
 {
@@ -26,12 +27,15 @@ namespace NETORM.ORM.Builder
         static void CreateRecord(Type type)
         {
             var properties = type.GetProperties();
-
             var attributes = type.GetCustomAttributes(true);
-            
-            tableRecords.Add(new TableRecord(type.Name, Enumerable.Empty<ColumnRecord>(), new TableConstrain()));
+            tableRecords.Add(new TableRecord(type.Name, CreateColumnRecords(properties), new TableConstrain()));
         }
 
-
+        private static IEnumerable<ColumnRecord> CreateColumnRecords(PropertyInfo[] properties)
+        {
+            return properties.Where(i => i.PropertyType.IsPrimitive)
+                .Select(i => new ColumnRecord(i.Name, i.PropertyType.Name, 0, new ColumnConstraint()))
+                .ToList();
+        }
     }
 }
