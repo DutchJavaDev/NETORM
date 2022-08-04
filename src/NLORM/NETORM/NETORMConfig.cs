@@ -5,15 +5,15 @@ using System.Reflection;
 
 namespace NETORM
 {
-    public static class DatabaseConfig
+    public static class NETORMConfig
     {
-        static string _connectionString { get; set; } = "User ID=root;Password=myPassword;Host=localhost;Port=5432;Database=myDataBase;";
+        private static string _connectionString { get; set; } = "User ID=root;Password=myPassword;Host=localhost;Port=5432;Database=myDataBase;";
 
-        static IList<Type> _types;
+        private static readonly IEnumerable<Type> _types;
 
-        static IEnumerable<TableRecord> _records;
+        private static IEnumerable<TableRecord> _records;
 
-        static DatabaseConfig() 
+        static NETORMConfig() 
         {
             _types = GetTableTypes();
             _records = Enumerable.Empty<TableRecord>();
@@ -23,22 +23,21 @@ namespace NETORM
         {
             _connectionString = connection;
 
-            if(_types.Count > 0)
-                _records = await RecordBuilder.BuildAsync(_types);
+            _records = await RecordBuilder.BuildAsync(_types);
 
             return new { };
         }
 
-        static IList<Type> GetTableTypes()
+        private static IEnumerable<Type> GetTableTypes()
         {
             var assembly = GetMainAssembly();
 
             var assemblyTypes = assembly.GetExportedTypes();
 
-            return assemblyTypes.Where(i => i.CustomAttributes.Any(i => i.AttributeType.Name == nameof(TableAttribute))).ToList();
+            return assemblyTypes.Where(i => Attribute.IsDefined(i, typeof(TableAttribute)));
         }
 
-        static Assembly GetMainAssembly() 
+        private static Assembly GetMainAssembly() 
         {
             var assembly = Assembly.GetEntryAssembly();
 
