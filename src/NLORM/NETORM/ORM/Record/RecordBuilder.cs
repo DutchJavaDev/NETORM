@@ -1,7 +1,5 @@
 ﻿using NETORM.Attributes;
 using NETORM.Data;
-using NETORM.Exceptions;
-using System.Collections.Concurrent;
 using System.Reflection;
 
 namespace NETORM.ORM.Builder
