@@ -9,7 +9,7 @@ namespace NETORM
 {
     public static class NETORMConfig
     {
-        private static string _connectionString { get; set; } = "User ID=postgres;Password=P@ssw0rd;Host=localhost;Port=5432;";
+        private static string _connectionString { get; set; } = "User ID=postgres;Password=P@ssw0rd!;Host=localhost;Port=5432;";
         private static string _database = "postgres";
         private static readonly IEnumerable<Type> _types;
 
@@ -21,13 +21,20 @@ namespace NETORM
             _records = Enumerable.Empty<TableRecord>();
         }
 
-        public static async Task<ITransAction> CreateConnection(string connection) 
+        public static async Task<IORM> CreateConnection(string connection, string database = "") 
         {
-            ///_connectionString = connection;
-
             _records = await RecordBuilder.BuildAsync(_types);
 
-            return new PostgressDb(_connectionString, _database);
+            return _CreateConnection(string.IsNullOrEmpty(connection) ? _connectionString : connection, 
+                                    string.IsNullOrEmpty(database) ? _database : database);
+        }
+
+        private static IORM _CreateConnection(string connection, string database)
+        {
+
+            /// Later-ish give type of db>/????
+            /// // postgress, mysql, sqlserver ... mongodb
+            return new PostgressDb(connection, database);
         }
 
         private static IEnumerable<Type> GetTableTypes()

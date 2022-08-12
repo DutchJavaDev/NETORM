@@ -2,8 +2,9 @@
 
 namespace NETORM.Interface
 {
-    public interface ITransAction
+    public interface IORM
     {
+        Task CreatDatabase();
         Task CreateTable(TableRecord tableRecord);
     }
 }

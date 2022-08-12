@@ -1,9 +1,12 @@
 ﻿using NETORM;
 using NETORM.Attributes;
 
-await NETORMConfig.CreateConnection("");
+var connectionString = "User ID=postgres;Password=P@ssw0rd!;Host=localhost;Port=5432;";
 
-Console.WriteLine("Done");
+await NETORMConfig.CreateConnection(connectionString);
+
+Console.WriteLine("Wating for exit key");
+Console.ReadKey();
 
 [Table("tblprofile")]
 public class Profile 

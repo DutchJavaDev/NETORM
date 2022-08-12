@@ -7,13 +7,6 @@ namespace NETORM
 
         public static IEnumerable<PropertyInfo> GetValidProperties(IEnumerable<PropertyInfo> properties)
         {
-            foreach (var item in properties)
-            {
-                if (!item.PropertyType.IsPrimitive)
-                { 
-                }
-            }
-
             return properties.Where(i => i.PropertyType.IsPrimitive);
         }
 

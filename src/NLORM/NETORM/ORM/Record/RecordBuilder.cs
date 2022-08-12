@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace NETORM.ORM.Builder
 {
-    internal class RecordBuilder
+    public class RecordBuilder
     {
         private static readonly IList<TableRecord> tableRecords;
 
@@ -32,7 +32,8 @@ namespace NETORM.ORM.Builder
 
         private static IEnumerable<ColumnRecord> CreateColumnRecords(IEnumerable<PropertyInfo> properties)
         {
-            return properties.Select(i => new ColumnRecord(i.Name, i.PropertyType.Name, 0, new ColumnConstraint()));
+            // by default column not null
+            return properties.Select(i => new ColumnRecord(i.Name, i.PropertyType.Name, new ColumnConstraint()));
         }
 
         private static string GetTableName(Type type) 
