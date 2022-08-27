@@ -1,5 +1,6 @@
 ﻿using NETORM.Attributes;
 using NETORM.Data;
+using NETORM.ORM.Query;
 using System.Reflection;
 
 namespace NETORM.ORM.Builder
@@ -30,10 +31,10 @@ namespace NETORM.ORM.Builder
             tableRecords.Add(new TableRecord(GetTableName(type), CreateColumnRecords(properties), new TableConstrain()));
         }
 
-        private static IEnumerable<ColumnRecord> CreateColumnRecords(IEnumerable<PropertyInfo> properties)
+        private static List<ColumnRecord> CreateColumnRecords(IEnumerable<PropertyInfo> properties)
         {
             // by default column not null
-            return properties.Select(i => new ColumnRecord(i.Name, i.PropertyType.Name, new ColumnConstraint()));
+            return properties.Select(i => new ColumnRecord(i.Name, QueryBuilder.GetDbType(i.PropertyType), new ColumnConstraint())).ToList();
         }
 
         private static string GetTableName(Type type) 

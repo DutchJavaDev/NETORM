@@ -45,11 +45,28 @@ namespace NETORM
 
             foreach(var table in _records)
             {
-                builder.Append($"CREATE TABLE IF NOT EXIST {table.TableName} (");
+                builder.Append($"CREATE TABLE IF NOT EXISTS {table.TableName} (");
                 //
-
+                for(var i = 0; i < table.ColumnRecords.Count; i++)
+                {
+                    var column = table.ColumnRecords[i];
+                    builder.Append($"{column.Name} {column.Type}");
+                    builder.Append(i == table.ColumnRecords.Count-1 ? "" : ",");
+                }
                 //
                 builder.Append(");");
+
+                try
+                {
+                    await connection.ExecuteAsync(builder.ToString());
+                }
+                catch (PostgresException e)
+                {
+
+                    throw;
+                }
+
+                builder.Clear();
             }
         }
 
