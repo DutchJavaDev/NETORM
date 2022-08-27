@@ -175,3 +175,7 @@ FakesAssemblies/
 src/NLORM/NLORM/x64/SQLite.Interop.dll
 .vs/VSWorkspaceState.json
 src/NLORM/.vs/
+*.v2
+*.vsidx
+*.v2
+*.v2
